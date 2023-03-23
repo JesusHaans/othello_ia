@@ -1,12 +1,10 @@
 class TableroJP{
   
   int[][] tablero = new int[8][8];
+  public static final  int VACIA = 0;
   
  void display(){
-   tablero[3][3]=1;
-   tablero[3][4]=2;
-   tablero[4][3]=2;
-   tablero[4][4]=1;
+
    createBoard(); 
  }
  
@@ -19,9 +17,17 @@ class TableroJP{
        rect(i*40,j*40,40,40);
        if(tablero[i][j]!=0){
          if(tablero[i][j] ==1){
+           noStroke();
            fill(0);
          }else if(tablero[i][j]==2){
+           noStroke();
            fill(255);
+         }else if(tablero[i][j] % 2 == 1){ // si es una posible jugada
+           noStroke();
+           fill(41, 105, 12);
+         }else if(tablero[i][j]% 2 ==0){ // si es una posible jugada
+           noStroke();
+           fill(155, 255, 108);
          }
          ellipse(i*40+20,j*40+20,30,30);
        }
@@ -29,5 +35,23 @@ class TableroJP{
      }
    }
  }
+ 
+ public int[][] tablero(){
+ return this.tablero;
+ }
+ 
+ public void poner(int x, int y , int valor){
+   tablero[x][y] = valor;
+ }
+ 
+ public int ficha(int x, int y){
+   return tablero[x][y];
+ }
+  void ponerFicha(int x, int y, int turno){
+   tablero[x][y] = turno;
+ }
+ 
+ 
+ 
  
 }
