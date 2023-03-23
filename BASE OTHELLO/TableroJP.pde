@@ -36,8 +36,22 @@ class TableroJP{
    }
  }
  
+ public int[][] tableroCopia(){
+   int[][] copia = new int[8][8];
+   for(int i = 0; i < 8 ; i++){
+     for(int j = 0; j < 8; j++){
+      copia[i][j] = tablero[i][j];   
+     }
+   }
+   return copia;
+ }
+ 
+ public void ponerTablero(int[][] tablero){
+   this.tablero = tablero;
+ }
+ 
  public int[][] tablero(){
- return this.tablero;
+   return this.tablero;
  }
  
  public void poner(int x, int y , int valor){
