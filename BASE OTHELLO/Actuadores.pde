@@ -36,7 +36,7 @@ class Actuadores{
        System.out.println("llegue a p1 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
        return;
      }else{
-       if(patron == 1 && tablero[x][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[x][j] == turnoContrario(turno) || tablero[x][j] == turno +4) ){
          
          patron = 2;
          tablero[x][j] = turno+4;
@@ -49,7 +49,7 @@ class Actuadores{
            if(patron == 2 && tablero[x][j] == turno){
              System.out.println("llegue a p4 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -73,7 +73,7 @@ class Actuadores{
        System.out.println("llegue a p1 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
        return;
      }else{
-       if(patron == 1 && tablero[x][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[x][j] == turnoContrario(turno) || tablero[x][j] == turno +4)){
          
          patron = 2;
          tablero[x][j] = turno+4;
@@ -86,7 +86,7 @@ class Actuadores{
            if(patron == 2 && tablero[x][j] == turno){
              System.out.println("llegue a p4 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -110,7 +110,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
        return;
      }else{
-       if(patron == 1 && tablero[i][y] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][y] == turnoContrario(turno) || tablero[i][y] == turno +4)){
          
          patron = 2;
          tablero[i][y] = turno+4;
@@ -123,7 +123,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][y] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -147,7 +147,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
        return;
      }else{
-       if(patron == 1 && tablero[i][y] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][y] == turnoContrario(turno) || tablero[i][y] == turno +4)){
          
          patron = 2;
          tablero[i][y] = turno+4;
@@ -160,7 +160,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][y] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -186,7 +186,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
        return;
      }else{
-       if(patron == 1 && tablero[i][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
          
          patron = 2;
          tablero[i][j] = turno+4;
@@ -199,7 +199,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][j] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -228,7 +228,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
        return;
      }else{
-       if(patron == 1 && tablero[i][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][j] == turnoContrario(turno)|| tablero[i][j] == turno +4)){
          
          patron = 2;
          tablero[i][j] = turno+4;
@@ -241,7 +241,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][j] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -270,7 +270,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
        return;
      }else{
-       if(patron == 1 && tablero[i][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
          
          patron = 2;
          tablero[i][j] = turno+4;
@@ -283,7 +283,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][j] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -312,7 +312,7 @@ void jugarHI(int x, int y, int turno){
        System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
        return;
      }else{
-       if(patron == 1 && tablero[i][j] == turnoContrario(turno)){
+       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
          
          patron = 2;
          tablero[i][j] = turno+4;
@@ -325,7 +325,7 @@ void jugarHI(int x, int y, int turno){
            if(patron == 2 && tablero[i][j] == turno){
              System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
              this.tablero.ponerTablero(tablero);
-             colocar(turno);
+             //colocar(turno);
              return;
            }
          }
@@ -348,6 +348,7 @@ void jugarHI(int x, int y, int turno){
          jugarDArD(x,y,turno);
          jugarDAbI(x,y,turno);
          jugarDAbD(x,y,turno); 
+         colocar(turno);
  }
  void limpiarTablero(){
    for(int i = 0; i < 8; i++){
