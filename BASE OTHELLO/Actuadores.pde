@@ -21,325 +21,196 @@ class Actuadores{
    } 
  }
  
-
+ boolean verificarVAr(int x, int y, int turno){
+  boolean verificacion = true;
+  for(int j = y + 1; j < 8; j++){
+    verificacion = verificacion && tablero.ficha(x,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(x,j) == 0? false : true;
+  }
+  return false;
+ }
+ 
  void jugarVAr(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- for(int j = y; j < 8; j++){
-   if(patron == 0){
-     
-     tablero[x][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[x][j] == turno || tablero[x][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[x][j] == turnoContrario(turno) || tablero[x][j] == turno +4) ){
-         
-         patron = 2;
-         tablero[x][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-       }else{
-         if(patron == 2 && tablero[x][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[x][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
- }
+   if(verificarVAr(x,y,turno)){
+    for(int j = y + 1; j < 8; j++){
+      if(tablero.ficha(x,j) == turnoContrario(turno)){
+        tablero.ponerFicha(x,j, turno);
+      }
+    }
+  }
  }
  
-  void jugarVAb(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- for(int j = y; j >= 0; j--){
-   if(patron == 0){
-     
-     tablero[x][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[x][j] == turno || tablero[x][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[x][j] == turnoContrario(turno) || tablero[x][j] == turno +4)){
-         
-         patron = 2;
-         tablero[x][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-       }else{
-         if(patron == 2 && tablero[x][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[x][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +x + " Y: " + j + " Valor: " + tablero[x][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
- }
+  boolean verificarVAb(int x, int y, int turno){
+  boolean verificacion = true;
+  for(int j = y - 1; j >= 0; j--){
+    verificacion = verificacion && tablero.ficha(x,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(x,j) == 0? false : true;
+  }
+  return false;
  }
  
-void jugarHI(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- for(int i = x;  i < 8; i++){
-   if(patron == 0){
-     
-     tablero[i][y] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][y] == turno || tablero[i][y] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][y] == turnoContrario(turno) || tablero[i][y] == turno +4)){
-         
-         patron = 2;
-         tablero[i][y] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-       }else{
-         if(patron == 2 && tablero[i][y] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][y] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
+ void jugarVAb(int x, int y, int turno){
+   if(verificarVAb(x,y,turno)){
+    for(int j = y - 1; j >=0; j--){
+      if(tablero.ficha(x,j) == turnoContrario(turno)){
+        tablero.ponerFicha(x,j, turno);
+      }
+    }
+  }
  }
+ 
+  boolean verificarHI(int x, int y, int turno){
+  boolean verificacion = true;
+  for(int i = x + 1;  i < 8; i++){
+    verificacion = verificacion && tablero.ficha(i,y) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,y) == 0? false : true;
+  }
+  return false;
+ }
+ 
+ void jugarHI(int x, int y, int turno){
+   if(verificarHI(x,y,turno)){
+    for(int i = x + 1;  i < 8; i++){
+      if(tablero.ficha(i,y) == turnoContrario(turno)){
+        tablero.ponerFicha(i,y, turno);
+      }
+    }
+  }
+ }
+ 
+   boolean verificarHD(int x, int y, int turno){
+  boolean verificacion = true;
+  for(int i = x - 1;  i >= 0; i--){
+    verificacion = verificacion && tablero.ficha(i,y) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,y) == 0? false : true;
+  }
+  return false;
  }
  
  void jugarHD(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- for(int i = x;  i >= 0; i--){
-   if(patron == 0){
-     
-     tablero[i][y] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][y] == turno || tablero[i][y] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][y] == turnoContrario(turno) || tablero[i][y] == turno +4)){
-         
-         patron = 2;
-         tablero[i][y] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-       }else{
-         if(patron == 2 && tablero[i][y] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][y] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + y + " Valor: " + tablero[i][y]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
+   if(verificarHD(x,y,turno)){
+    for(int i = x - 1;  i >= 0; i--){
+      if(tablero.ficha(i,y) == turnoContrario(turno)){
+        tablero.ponerFicha(i,y, turno);
+      }
+    }
+  }
  }
+ 
+ boolean verificarDArI(int x, int y, int turno){
+  boolean verificacion = true;
+  int i = x + 1;
+  int j = y + 1;
+   while(i < 8 && j < 8){
+    verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    i++;
+    j++;
+  }
+  return false;
  }
  
  void jugarDArI(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- int i = x;
- int j = y;
- while(i < 8 && j < 8){
-   if(patron == 0){
-     
-     tablero[i][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][j] == turno || tablero[i][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
-         
-         patron = 2;
-         tablero[i][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " +j + " Valor: " + tablero[i][j]);
-       }else{
-         if(patron == 2 && tablero[i][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
-   i++;
-   j++;
- }
+   if(verificarDArI(x,y,turno)){
+    int i = x + 1;
+    int j = y + 1;
+    while(i < 8 && j < 8){
+      if(tablero.ficha(i,j) == turnoContrario(turno)){
+        tablero.ponerFicha(i,j, turno);
+      }
+      i++;
+      j++;
+    }
+  }
  }
  
-  
+ boolean verificarDArD(int x, int y, int turno){
+  boolean verificacion = true;
+  int i = x - 1;
+  int j = y + 1;
+   while(i >= 0 && j < 8){
+    verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    i--;
+    j++;
+  }
+  return false;
+ }
+ 
  void jugarDArD(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- int i = x;
- int j = y;
- while(i >=0 && j < 8){
-   if(patron == 0){
-     
-     tablero[i][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][j] == turno || tablero[i][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][j] == turnoContrario(turno)|| tablero[i][j] == turno +4)){
-         
-         patron = 2;
-         tablero[i][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " +j + " Valor: " + tablero[i][j]);
-       }else{
-         if(patron == 2 && tablero[i][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
-   i--;
-   j++;
+   if(verificarDArD(x,y,turno)){
+    int i = x - 1;
+    int j = y + 1;
+    while(i >= 0 && j < 8){
+      if(tablero.ficha(i,j) == turnoContrario(turno)){
+        tablero.ponerFicha(i,j, turno);
+      }
+      i--;
+      j++;
+    }
+  }
  }
+
+  boolean verificarDAbI(int x, int y, int turno){
+  boolean verificacion = true;
+  int i = x + 1;
+  int j = y - 1;
+   while(i < 8 && j >= 0){
+    verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    i++;
+    j--;
+  }
+  return false;
  }
  
-  
  void jugarDAbI(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- int i = x;
- int j = y;
- while(i < 8 && j >= 0){
-   if(patron == 0){
-     
-     tablero[i][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][j] == turno || tablero[i][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
-         
-         patron = 2;
-         tablero[i][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " +j + " Valor: " + tablero[i][j]);
-       }else{
-         if(patron == 2 && tablero[i][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
-   i++;
-   j--;
+   if(verificarDAbI(x,y,turno)){
+    int i = x + 1;
+    int j = y - 1;
+    while(i < 8 && j >= 0){
+      if(tablero.ficha(i,j) == turnoContrario(turno)){
+        tablero.ponerFicha(i,j, turno);
+      }
+      i++;
+      j--;
+    }
+  }
  }
+ 
+ boolean verificarDAbD(int x, int y, int turno){
+  boolean verificacion = true;
+  int i = x - 1;
+  int j = y - 1;
+   while(i >= 0 && j >= 0){
+    verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
+    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    i--;
+    j--;
+  }
+  return false;
+ }
+ 
+ void jugarDAbD(int x, int y, int turno){
+   if(verificarDAbD(x,y,turno)){
+    int i = x - 1;
+    int j = y - 1;
+    while(i >= 0 && j >= 0){
+      if(tablero.ficha(i,j) == turnoContrario(turno)){
+        tablero.ponerFicha(i,j, turno);
+      }
+      i--;
+      j--;
+    }
+  }
  }
  
   
- void jugarDAbD(int x, int y, int turno){
- int patron = 0;
- int[][] tablero = this.tablero.tableroCopia();
- int i = x;
- int j = y;
- while(i >= 0 && j >= 0){
-   if(patron == 0){
-     
-     tablero[i][j] = turno+4;
-     System.out.println("llegue a p0" + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-     patron= 1;
-   }else{
-     if(patron == 1 && (tablero[i][j] == turno || tablero[i][j] == 0) ){
-       System.out.println("llegue a p1 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-       return;
-     }else{
-       if(patron == 1 && (tablero[i][j] == turnoContrario(turno) || tablero[i][j] == turno +4)){
-         
-         patron = 2;
-         tablero[i][j] = turno+4;
-         System.out.println("llegue a p2 " + "x: " +i + " Y: " +j + " Valor: " + tablero[i][j]);
-       }else{
-         if(patron == 2 && tablero[i][j] == 0){
-           System.out.println("llegue a p3 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-           return;
-         }else{
-           if(patron == 2 && tablero[i][j] == turno){
-             System.out.println("llegue a p4 " + "x: " +i + " Y: " + j + " Valor: " + tablero[i][j]);
-             this.tablero.ponerTablero(tablero);
-             //colocar(turno);
-             return;
-           }
-         }
-       }
-     }
-   }
-   i--;
-   j--;
- }
- }
-
+ 
 
  
- void jugar(int x, int y, int turno){
+ boolean jugar(int x, int y, int turno){
+     if(tablero.ficha(x,y) == 3 || tablero.ficha(x,y) == 4){
          jugarVAr(x,y,turno);
          jugarVAb(x,y,turno);
          jugarHI(x,y,turno);
@@ -348,7 +219,12 @@ void jugarHI(int x, int y, int turno){
          jugarDArD(x,y,turno);
          jugarDAbI(x,y,turno);
          jugarDAbD(x,y,turno); 
+         tablero.ponerFicha(x,y, turno);
          colocar(turno);
+         return true;
+     }else{
+       return false;
+     }
  }
  void limpiarTablero(){
    for(int i = 0; i < 8; i++){
