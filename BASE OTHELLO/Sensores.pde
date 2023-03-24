@@ -11,6 +11,26 @@ class Sensores{
  return turno == 1 ? 2: 1;
  }
  
+ int puntajeN(){
+   int puntos = 0;
+  for(int i = 0; i < 8 ; i++){
+    for(int j = 0; j < 8; j++){
+      if(tablero.ficha(i,j) == 1) puntos++;
+    }
+  }
+  return puntos;
+ }
+ 
+ int puntajeB(){
+   int puntos = 0;
+  for(int i = 0; i < 8 ; i++){
+    for(int j = 0; j < 8; j++){
+      if(tablero.ficha(i,j) == 2) puntos++;
+    }
+  }
+  return puntos;
+ }
+ 
  void jugadaVAr(int x, int y, int turno){
  int patron = turno;
  for(int i = y; i >= 0 ; i--){
@@ -212,5 +232,15 @@ class Sensores{
    }
  }
  
- 
+ int numPosiblesJugadas(int turno){
+   int c = 0;
+   for(int i = 0; i < 8; i++){
+     for(int j = 0; j < 8; j++){
+       if(tablero.ficha(i,j) == turno + 2){
+         c++;
+       }
+     }
+   }
+   return c;
+ }
 }
