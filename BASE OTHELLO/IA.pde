@@ -4,12 +4,12 @@ class IA{
   String nombre = "IA";   //Nombre de la IA
   boolean turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
-  Tablero tab;            //Ejemplar de tablero para las funciones necesarias
+  TableroJP tab;            //Ejemplar de tablero para las funciones necesarias
   //int deep = 2;         //Profundidad del árbbol.
   //double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
   
   //Constructor para la Inteligencia
-  IA(int[][] mundo, Tablero tab, int deep, String nom){
+  IA(int[][] mundo, TableroJP tab, int deep, String nom){
     //Implementar
   }
   
@@ -61,8 +61,9 @@ class IA{
     //IMPLEMENTAR      
   }  
   
-  double minimax(Nodo nodo, int profundidad, boolean MinMax) {        
+  double minimax(NodoJP nodo, int profundidad, boolean MinMax) {        
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
+    return 0.0;
   }
 
   /**

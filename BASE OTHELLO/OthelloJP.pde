@@ -1,4 +1,4 @@
-TableroJP tablero;
+ TableroJP tablero;
 Sensores sensor;
 Actuadores actuador;
 boolean puedeJugarN;
