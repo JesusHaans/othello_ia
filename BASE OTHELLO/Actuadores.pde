@@ -25,7 +25,7 @@ class Actuadores{
   boolean verificacion = true;
   for(int j = y + 1; j < 8; j++){
     verificacion = verificacion && tablero.ficha(x,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(x,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(x,j) == 0) || (tablero.ficha(x,j) == turno + 2) ? false : true;
   }
   return false;
  }
@@ -33,6 +33,7 @@ class Actuadores{
  void jugarVAr(int x, int y, int turno){
    if(verificarVAr(x,y,turno)){
     for(int j = y + 1; j < 8; j++){
+      if( tablero.ficha(x,j) == turno) return;
       if(tablero.ficha(x,j) == turnoContrario(turno)){
         tablero.ponerFicha(x,j, turno);
       }
@@ -44,7 +45,7 @@ class Actuadores{
   boolean verificacion = true;
   for(int j = y - 1; j >= 0; j--){
     verificacion = verificacion && tablero.ficha(x,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(x,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(x,j) == 0) || (tablero.ficha(x,j) == turno + 2) ? false : true;
   }
   return false;
  }
@@ -52,6 +53,7 @@ class Actuadores{
  void jugarVAb(int x, int y, int turno){
    if(verificarVAb(x,y,turno)){
     for(int j = y - 1; j >=0; j--){
+      if( tablero.ficha(x,j) == turno) return;
       if(tablero.ficha(x,j) == turnoContrario(turno)){
         tablero.ponerFicha(x,j, turno);
       }
@@ -63,7 +65,7 @@ class Actuadores{
   boolean verificacion = true;
   for(int i = x + 1;  i < 8; i++){
     verificacion = verificacion && tablero.ficha(i,y) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,y) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,y) == 0) || (tablero.ficha(i,y) == turno + 2) ? false : true;
   }
   return false;
  }
@@ -71,6 +73,7 @@ class Actuadores{
  void jugarHI(int x, int y, int turno){
    if(verificarHI(x,y,turno)){
     for(int i = x + 1;  i < 8; i++){
+      if( tablero.ficha(i,y) == turno) return;
       if(tablero.ficha(i,y) == turnoContrario(turno)){
         tablero.ponerFicha(i,y, turno);
       }
@@ -82,7 +85,7 @@ class Actuadores{
   boolean verificacion = true;
   for(int i = x - 1;  i >= 0; i--){
     verificacion = verificacion && tablero.ficha(i,y) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,y) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,y) == 0) || (tablero.ficha(i,y) == turno + 2) ? false : true;
   }
   return false;
  }
@@ -90,6 +93,7 @@ class Actuadores{
  void jugarHD(int x, int y, int turno){
    if(verificarHD(x,y,turno)){
     for(int i = x - 1;  i >= 0; i--){
+      if( tablero.ficha(i,y) == turno) return;
       if(tablero.ficha(i,y) == turnoContrario(turno)){
         tablero.ponerFicha(i,y, turno);
       }
@@ -103,7 +107,7 @@ class Actuadores{
   int j = y + 1;
    while(i < 8 && j < 8){
     verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,j) == 0) || (tablero.ficha(i,j) == turno + 2) ? false : true;
     i++;
     j++;
   }
@@ -115,6 +119,7 @@ class Actuadores{
     int i = x + 1;
     int j = y + 1;
     while(i < 8 && j < 8){
+      if( tablero.ficha(i,j) == turno) return;
       if(tablero.ficha(i,j) == turnoContrario(turno)){
         tablero.ponerFicha(i,j, turno);
       }
@@ -130,7 +135,7 @@ class Actuadores{
   int j = y + 1;
    while(i >= 0 && j < 8){
     verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,j) == 0) || (tablero.ficha(i,j) == turno + 2) ? false : true;
     i--;
     j++;
   }
@@ -142,6 +147,7 @@ class Actuadores{
     int i = x - 1;
     int j = y + 1;
     while(i >= 0 && j < 8){
+      if( tablero.ficha(i,j) == turno) return;
       if(tablero.ficha(i,j) == turnoContrario(turno)){
         tablero.ponerFicha(i,j, turno);
       }
@@ -157,7 +163,7 @@ class Actuadores{
   int j = y - 1;
    while(i < 8 && j >= 0){
     verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,j) == 0) || (tablero.ficha(i,j) == turno + 2) ? false : true;
     i++;
     j--;
   }
@@ -169,6 +175,7 @@ class Actuadores{
     int i = x + 1;
     int j = y - 1;
     while(i < 8 && j >= 0){
+      if( tablero.ficha(i,j) == turno) return;
       if(tablero.ficha(i,j) == turnoContrario(turno)){
         tablero.ponerFicha(i,j, turno);
       }
@@ -184,7 +191,7 @@ class Actuadores{
   int j = y - 1;
    while(i >= 0 && j >= 0){
     verificacion = verificacion && tablero.ficha(i,j) == turnoContrario(turno);
-    if(!verificacion) return tablero.ficha(i,j) == 0? false : true;
+    if(!verificacion) return (tablero.ficha(i,j) == 0) || (tablero.ficha(i,j) == turno + 2) ? false : true;
     i--;
     j--;
   }
@@ -196,6 +203,7 @@ class Actuadores{
     int i = x - 1;
     int j = y - 1;
     while(i >= 0 && j >= 0){
+      if( tablero.ficha(i,j) == turno) return;
       if(tablero.ficha(i,j) == turnoContrario(turno)){
         tablero.ponerFicha(i,j, turno);
       }
