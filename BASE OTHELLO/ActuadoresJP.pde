@@ -1,9 +1,9 @@
-class Actuadores{
+class ActuadoresJP{
   
   TableroJP tablero;
   public static final  int VACIA = 0;
  
- public Actuadores(TableroJP tablero){
+ public ActuadoresJP(TableroJP tablero){
  this.tablero = tablero;
  }
  

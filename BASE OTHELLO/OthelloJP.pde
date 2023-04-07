@@ -1,6 +1,6 @@
  TableroJP tablero;
-Sensores sensor;
-Actuadores actuador;
+SensoresJP sensor;
+ActuadoresJP actuador;
 boolean puedeJugarN;
 boolean puedeJugarB;
 int turno = 1;
@@ -8,8 +8,8 @@ void setup(){
   size(320,320);
   //noLoop();
   tablero = new TableroJP();
-  sensor = new Sensores(tablero);
-  actuador = new Actuadores(tablero);
+  sensor = new SensoresJP(tablero);
+  actuador = new ActuadoresJP(tablero);
    tablero.tablero[3][3]=1;
    tablero.tablero[3][4]=2;
    tablero.tablero[4][3]=2;
