@@ -4,7 +4,7 @@ class IA{
   String nombre = "IA";   //Nombre de la IA
   boolean turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
-  TableroJP tab;            //Ejemplar de tablero para las funciones necesarias
+  TableroJP tablero;            //Ejemplar de tablero para las funciones necesarias
   int deep = 2;         //Profundidad del árbbol.
   //double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
   ArbolJP arbol;
@@ -15,10 +15,10 @@ class IA{
   IA(int[][] mundo, TableroJP tab, int deep, String nom){
     //Implementar
     this.mundo = mundo;
-    this.tab = tab;
-    this.tab.ponerTablero(copyMatrix(this.mundo));
-    sensor = new SensoresJP(this.tab);
-    actuador = new ActuadoresJP(this.tab);
+    this.tablero = tab;
+    this.tablero.ponerTablero(copyMatrix(this.mundo));
+    sensor = new SensoresJP(this.tablero);
+    actuador = new ActuadoresJP(this.tablero);
     this.deep = deep;
     this.nombre = nom;
   }
