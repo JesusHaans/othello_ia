@@ -72,17 +72,23 @@ class IA{
   /**
    * Método que crea todas las ramas del árbol
    */
-  void crearRamas(NodoJP nodo, int profun, boolean turn){    
-    for(int i = 0; i<8; i++){
-      for(int j = 0; j<8; j++){
-        if(nodo.tablero().ficha(i,j) == turno(turn) + 2){
-          tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
-          buscarJugadas(tablero.tablero(), turn);
-          actuador.jugar(i, j, turno(turn));
-          TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));
-          NodoJP hijo = new NodoJP(nodo, tableroHijo );
-          nodo.agregarHijo(hijo);
+  void crearRamas(NodoJP nodo, int profun, boolean turn){   
+    if(profun > 0){
+      for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+          if(nodo.tablero().ficha(i,j) == turno(turn) + 2){
+            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
+            buscarJugadas(tablero.tablero(), turn);
+            actuador.jugar(i, j, turno(turn));
+            TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));
+            NodoJP hijo = new NodoJP(nodo, tableroHijo );
+            nodo.agregarHijo(hijo);
+          }
         }
+      }
+      for(int i = 0; i < nodo.hijos().size(); i++){
+        NodoJP hijo = (NodoJP) nodo.hijos().get(i);
+        crearRamas(hijo, profun - 1, !turn);
       }
     }
   }  
