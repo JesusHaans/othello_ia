@@ -77,17 +77,19 @@ class IA{
       for(int i = 0; i<8; i++){
         for(int j = 0; j<8; j++){
           if(nodo.tablero().ficha(i,j) == turno(turn) + 2){
-            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
-            buscarJugadas(tablero.tablero(), turn);
             actuador.jugar(i, j, turno(turn));
             TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));
             NodoJP hijo = new NodoJP(nodo, tableroHijo );
             nodo.agregarHijo(hijo);
+            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
+            buscarJugadas(tablero.tablero(), turn);
           }
         }
       }
       for(int i = 0; i < nodo.hijos().size(); i++){
         NodoJP hijo = (NodoJP) nodo.hijos().get(i);
+        tablero.ponerTablero(hijo.tablero().tablero());
+        buscarJugadas(tablero.tablero(), turn);
         crearRamas(hijo, profun - 1, !turn);
       }
     }
