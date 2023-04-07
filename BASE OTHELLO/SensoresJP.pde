@@ -1,9 +1,9 @@
-class Sensores{
+class SensoresJP{
   
   TableroJP tablero;
   public static final  int VACIA = 0;
  
- public Sensores(TableroJP tablero){
+ public SensoresJP(TableroJP tablero){
  this.tablero = tablero;
  }
  
