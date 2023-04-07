@@ -8,7 +8,7 @@ class IA{
   int deep = 2;         //Profundidad del árbbol.
   //double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
   ArbolJP arbol;
-  SensorJP sensor;
+  SensoresJP sensor;
   ActuadoresJP actuador;
   
   //Constructor para la Inteligencia
@@ -17,7 +17,7 @@ class IA{
     this.mundo = mundo;
     this.tab = tab;
     this.tab.ponerTablero(copyMatrix(this.mundo));
-    sensor = new SensorJP(this.tab);
+    sensor = new SensoresJP(this.tab);
     actuador = new ActuadoresJP(this.tab);
     this.deep = deep;
     this.nombre = nom;
