@@ -5,12 +5,22 @@ class IA{
   boolean turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
   TableroJP tab;            //Ejemplar de tablero para las funciones necesarias
-  //int deep = 2;         //Profundidad del árbbol.
+  int deep = 2;         //Profundidad del árbbol.
   //double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
+  ArbolJP arbol;
+  Sensores sensor;
+  Actuadores actuador;
   
   //Constructor para la Inteligencia
   IA(int[][] mundo, TableroJP tab, int deep, String nom){
     //Implementar
+    this.mundo = mundo;
+    this.tab = tab;
+    this.tab.ponerTablero(copyMatrix(this.mundo));
+    sensor = new Sensores(this.tab);
+    actuador = new Actuadores(this.tab);
+    this.deep = deep;
+    this.nombre = nom;
   }
   
   /**
@@ -35,7 +45,9 @@ class IA{
    * Método para buscar todas las posibles jugadas para un turno específico
    */
   void buscarJugadas(int[][] world, boolean turn){
-    //Implementar
+    tablero.ponerTablero(world);
+    sensor.posiblesJugadas(turno(turn));
+    
   }
   
   /**
@@ -43,7 +55,9 @@ class IA{
    * Deberán usar aquí su implementación de árboles.
    */
   void crearArbol(boolean turn){
-    //IMPLEMENTAR
+    iniciarArbol();
+    crearRamas(arbol.raiz(), deep, turno);
+    
   }
   
   /**
@@ -51,14 +65,26 @@ class IA{
    * Deberán usar aquí su implementación de árboles.
    */
   void iniciarArbol(){
-    //IMPLEMENTAR
+    buscarJugadas(copyMatrix(mundo), turno );
+    arbol = new ArbolJP(new NodoJP(null, new TableroJP(copyMatrix(tablero.tablero()))));
   }
 
   /**
    * Método que crea todas las ramas del árbol
    */
-  void crearRamas(/**Usar nodo del arbol como parámetro, */ int profun, boolean turn){    
-    //IMPLEMENTAR      
+  void crearRamas(NodoJP nodo, int profun, boolean turn){    
+    for(int i = 0; i<8; i++){
+      for(int j = 0; j<8; j++){
+        if(nodo.tablero().ficha(i,j) == turno(turn) + 2){
+          tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
+          buscarJugadas(tablero.tablero(), turn);
+          actuador.jugar(i, j, turno(turn));
+          TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));
+          NodoJP hijo = new NodoJP(nodo, tableroHijo );
+          nodo.agregarHijo(hijo);
+        }
+      }
+    }
   }  
   
   double minimax(NodoJP nodo, int profundidad, boolean MinMax) {        
@@ -125,5 +151,9 @@ class IA{
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
     return null;
   }
+  
+     public int turno(boolean b){
+   return b? 1: 2;
+   }
    
 }

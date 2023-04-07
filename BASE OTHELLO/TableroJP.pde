@@ -3,6 +3,13 @@ class TableroJP{
   int[][] tablero = new int[8][8];
   public static final  int VACIA = 0;
   
+  public TableroJP(int[][] tablero){
+    this.tablero = tablero;
+    
+  }
+  public TableroJP(){}
+  
+  
  void display(){
 
    createBoard(); 
@@ -65,7 +72,7 @@ class TableroJP{
    tablero[x][y] = turno;
  }
  
- 
+
  
  
 }
