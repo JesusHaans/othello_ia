@@ -45,9 +45,9 @@ class IA{
    * Método para buscar todas las posibles jugadas para un turno específico
    */
   void buscarJugadas(int[][] world, boolean turn){
-    tablero.ponerTablero(world);
-    sensor.posiblesJugadas(turno(turn));
-    
+    tablero.ponerTablero(world);//Ponemos el arreglo que representa el mundo en nuestro objeto tablero para uso de sensores y actuadores
+    sensor.posiblesJugadas(turno(turn));//Una vez que actualizamos el tablero, usamos el sensor para poner las posibles jugadas
+    //Recordar que las posibles jugadas se marcan con el valor = turno + 2
   }
   
   /**
@@ -55,8 +55,8 @@ class IA{
    * Deberán usar aquí su implementación de árboles.
    */
   void crearArbol(boolean turn){
-    iniciarArbol();
-    crearRamas(arbol.raiz(), deep, turno);
+    iniciarArbol();//iniciamos la estructura
+    crearRamas(arbol.raiz(), deep, turno);//Comenzamos a abrir las ramas sobre la estructura que creamos
     
   }
   
@@ -65,32 +65,45 @@ class IA{
    * Deberán usar aquí su implementación de árboles.
    */
   void iniciarArbol(){
-    buscarJugadas(copyMatrix(mundo), turno );
-    arbol = new ArbolJP(new NodoJP(null, new TableroJP(copyMatrix(tablero.tablero()))));
+    buscarJugadas(copyMatrix(mundo), turno );//Buscamos las jugadas para el nodo donde iniciamos el arbol (el tablero actual)
+    arbol = new ArbolJP(new NodoJP(null, new TableroJP(copyMatrix(tablero.tablero()))));//iniciamos la estructura del árbol
   }
 
   /**
    * Método que crea todas las ramas del árbol
    */
   void crearRamas(NodoJP nodo, int profun, boolean turn){   
-    if(profun > 0){
+    if(profun > 0){//la profundidad va bajando, si ya es cero, terminamos de desplegar el árbol
+      /*
+        Revisamos nuestro tablero actual que debe estar actualizado con las posibles jugadas
+        Si encontramos una posible jugada (turno + 2) entonces creamos un Nodo
+        al terminar de hacer los nodos para un tablero, hacemos recursión para cada nuevo nodo si aún podemos
+      */
       for(int i = 0; i<8; i++){
         for(int j = 0; j<8; j++){
-          if(nodo.tablero().ficha(i,j) == turno(turn) + 2){
-            actuador.jugar(i, j, turno(turn));
-            TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));
-            NodoJP hijo = new NodoJP(nodo, tableroHijo );
-            nodo.agregarHijo(hijo);
-            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global
-            buscarJugadas(tablero.tablero(), turn);
+          //Revisión de casilla
+          if(nodo.tablero().ficha(i,j) == turno(turn) + 2){//si esta casilla es una posible jugada
+            
+            //Adición de un nodo
+            actuador.jugar(i, j, turno(turn));//jugamos esa jugada para hacer un nodo
+            TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));//Creamos el objeto Tablero para el Nodo con la copia del mundo con su jugada
+            NodoJP hijo = new NodoJP(nodo, tableroHijo );//Creamos el objeto Nodo con su tablero e indicando el padre
+            nodo.agregarHijo(hijo);// Agregamos el nuevo nodo a los hijos del nodo actual
+            
+            //Reset del tablero para usar sensores y actuadores con el nodo actual(padre)
+            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global de nuevo
+            buscarJugadas(tablero.tablero(), turn);//regresamos el tablero al tablero con las posibles jugadas del nodo actual(padre)
           }
         }
       }
+      
+      //Terminamos agregando las posibles jugadas del nodo actual (padre)
+      //Así que recorremos a todos los nuevos hijos generados para expandir el árbol
       for(int i = 0; i < nodo.hijos().size(); i++){
-        NodoJP hijo = (NodoJP) nodo.hijos().get(i);
-        tablero.ponerTablero(hijo.tablero().tablero());
-        buscarJugadas(tablero.tablero(), turn);
-        crearRamas(hijo, profun - 1, !turn);
+        NodoJP hijo = (NodoJP) nodo.hijos().get(i);//obtenemos un hijo i
+        tablero.ponerTablero(hijo.tablero().tablero());//Asignamos su tablero al tablero actual para usar sensores y actuadores
+        buscarJugadas(tablero.tablero(), !turn);//Buscamos las posibles jugadas, consideremos que cambiamos de turno
+        crearRamas(hijo, profun - 1, !turn);//Expandimos el arbol con sus posibles jugadas
       }
     }
   }  
@@ -160,7 +173,10 @@ class IA{
     return null;
   }
   
-     public int turno(boolean b){
+ /**
+  * Este método nos da la represetación numérica del turno.
+  */
+ public int turno(boolean b){
    return b? 1: 2;
    }
    
