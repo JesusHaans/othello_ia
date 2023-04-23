@@ -2,11 +2,11 @@ class IAJP{
 
   //Variables locales 
   String nombre = "IA";   //Nombre de la IA
-  boolean turno;          //Turno que juega la IA
+  int turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
   TableroJP tablero;            //Ejemplar de tablero para las funciones necesarias
   int deep = 2;         //Profundidad del árbbol.
-  //double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
+  double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
   ArbolJP arbol;
   SensoresJP sensor;
   ActuadoresJP actuador;
@@ -56,7 +56,7 @@ class IAJP{
    */
   void crearArbol(boolean turn){
     iniciarArbol();//iniciamos la estructura
-    crearRamas(arbol.raiz(), deep, turno);//Comenzamos a abrir las ramas sobre la estructura que creamos
+    crearRamas(arbol.raiz(), deep, turn);//Comenzamos a abrir las ramas sobre la estructura que creamos
     
   }
   
@@ -65,7 +65,7 @@ class IAJP{
    * Deberán usar aquí su implementación de árboles.
    */
   void iniciarArbol(){
-    buscarJugadas(copyMatrix(mundo), turno );//Buscamos las jugadas para el nodo donde iniciamos el arbol (el tablero actual)
+    buscarJugadas(copyMatrix(mundo), turno == 1 ? puedeJugarN : puedeJugarB );//Buscamos las jugadas para el nodo donde iniciamos el arbol (el tablero actual)
     arbol = new ArbolJP(new NodoJP(null, new TableroJP(copyMatrix(tablero.tablero()))));//iniciamos la estructura del árbol
   }
 
@@ -110,6 +110,16 @@ class IAJP{
   
   double minimax(NodoJP nodo, int profundidad, boolean MinMax) {        
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
+    double valor = 0.0;
+    if(profundidad == 0 || nodo.esHoja() ){
+      return valorHeuri(nodo.tablero().tablero(),MinMax);
+    }
+    if(MinMax){
+      valor = Double.POSITIVE_INFINITY;
+      for(NodoJP n : nodo.hijos()){
+      
+      }
+    }
     return 0.0;
   }
 
@@ -146,7 +156,11 @@ class IAJP{
     */    
   double Max(double uno, double dos){
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
-    return 0;
+    if(uno > dos){
+      return uno;
+    }else{
+      return dos;    
+    }
   } 
 
   /**
@@ -154,7 +168,11 @@ class IAJP{
     */
   double Min(double uno, double dos) {
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
-    return 0;
+    if(uno > dos){
+      return dos;
+    }else{
+      return uno;    
+    }
   }
 
   /**
@@ -162,7 +180,38 @@ class IAJP{
     */    
   double valorHeuri(int[][] tablero, boolean turn){
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
-    return 0;
+    int fichasRival = 0;
+    int fichasMias = 0;
+    int turnoRival = turno == 1 ? 2 : 1;
+    if(turn == true){
+      int i = 0;
+      int j = 0;
+      while(i<8){
+        while(j<8){
+          if(tablero[i][j] == this.turno){
+            fichasMias = fichasMias+1;
+          }
+          if(tablero[i][j] == turnoRival){
+            fichasMias = fichasRival+1;
+          }
+        }
+      }
+      return fichasMias - fichasRival;
+    }else{
+      int i = 0;
+      int j = 0;
+      while(i<8){
+        while(j<8){
+          if(tablero[i][j] == this.turno){
+            fichasMias = fichasMias+1;
+          }
+          if(tablero[i][j] == turnoRival){
+            fichasMias = fichasRival+1;
+          }
+        }
+      }
+      return fichasRival - fichasMias;
+    }
   } 
   
   /**

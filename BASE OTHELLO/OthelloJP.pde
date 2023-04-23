@@ -1,6 +1,7 @@
- TableroJP tablero;
+TableroJP tablero;
 SensoresJP sensor;
 ActuadoresJP actuador;
+
 boolean puedeJugarN;
 boolean puedeJugarB;
 int turno = 1;
