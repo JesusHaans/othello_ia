@@ -1,4 +1,4 @@
-class IA{
+class IAJP{
 
   //Variables locales 
   String nombre = "IA";   //Nombre de la IA
@@ -12,7 +12,7 @@ class IA{
   ActuadoresJP actuador;
   
   //Constructor para la Inteligencia
-  IA(int[][] mundo, TableroJP tab, int deep, String nom){
+  IAJP(int[][] mundo, TableroJP tab, int deep, String nom){
     //Implementar
     this.mundo = mundo;
     this.tablero = tab;
