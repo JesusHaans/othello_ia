@@ -243,11 +243,20 @@ class IAJP{
     int maximo = 0;
     Iterator it = jugadas.iterator();
     for(int i=0;i<jugadas.size();i++){
-      NodoJP nodo = (NodoJP) jugadas.get(i);
+      NodoJP nodo = (NodoJP) it.next();
       double auxd = minimax(nodo,deep,true);
       resultadosminiMax[i] = auxd;
     }
-    return null;
+    double aux = resultadosminiMax[0];
+    for(int i=0; i<jugadas.size();i++){
+      if(aux < resultadosminiMax[i]){
+        aux = resultadosminiMax[i];
+        maximo = i;
+      }
+    }
+    NodoJP nodoTiro = (NodoJP) jugadas.get(maximo);
+    int[][] tiro = nodoTiro.tablero().tablero();
+    return tiro;
   }
   
  /**
