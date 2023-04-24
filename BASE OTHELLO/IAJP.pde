@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 class IAJP{
 
   //Variables locales 
@@ -116,7 +119,9 @@ class IAJP{
     }
     if(MinMax){
       valor = Double.POSITIVE_INFINITY;
-      for(NodoJP n : nodo.hijos()){
+      List hijos = nodo.hijos();
+      Iterator it = hijos.iterator();
+      while(it.hasNext()){
       
       }
     }
