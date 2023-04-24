@@ -237,6 +237,16 @@ class IAJP{
     */  
   int[][] dondeTirar(){
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
+    crearArbol(turno);
+    List jugadas = arbol.raiz().hijos();
+    double[] resultadosminiMax = new double[jugadas.size()];
+    int maximo = 0;
+    Iterator it = jugadas.iterator();
+    for(int i=0;i<jugadas.size();i++){
+      NodoJP nodo = (NodoJP) jugadas.get(i);
+      double auxd = minimax(nodo,deep,true);
+      resultadosminiMax[i] = auxd;
+    }
     return null;
   }
   
