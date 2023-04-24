@@ -1,11 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 class IAJP{
 
   //Variables locales 
   String nombre = "IA";   //Nombre de la IA
-  int turno;          //Turno que juega la IA
+  boolean turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
   TableroJP tablero;            //Ejemplar de tablero para las funciones necesarias
   int deep = 2;         //Profundidad del árbbol.
@@ -59,7 +60,7 @@ class IAJP{
    */
   void crearArbol(boolean turn){
     iniciarArbol();//iniciamos la estructura
-    crearRamas(arbol.raiz(), deep, turn);//Comenzamos a abrir las ramas sobre la estructura que creamos
+    crearRamas(arbol.raiz(), deep, turno);//Comenzamos a abrir las ramas sobre la estructura que creamos
     
   }
   
@@ -68,7 +69,7 @@ class IAJP{
    * Deberán usar aquí su implementación de árboles.
    */
   void iniciarArbol(){
-    buscarJugadas(copyMatrix(mundo), turno == 1 ? puedeJugarN : puedeJugarB );//Buscamos las jugadas para el nodo donde iniciamos el arbol (el tablero actual)
+    buscarJugadas(copyMatrix(mundo), turno );//Buscamos las jugadas para el nodo donde iniciamos el arbol (el tablero actual)
     arbol = new ArbolJP(new NodoJP(null, new TableroJP(copyMatrix(tablero.tablero()))));//iniciamos la estructura del árbol
   }
 
@@ -118,14 +119,26 @@ class IAJP{
       return valorHeuri(nodo.tablero().tablero(),MinMax);
     }
     if(MinMax){
+      valor = Double.NEGATIVE_INFINITY;
+      List hijos = nodo.hijos();
+      Iterator it = hijos.iterator();
+      profundidad = profundidad - 1;
+      while(it.hasNext()){
+        NodoJP hijo = (NodoJP)it.next();
+        valor = Max(valor, minimax(hijo, profundidad, !MinMax));
+      }
+      return valor;
+    }else{
       valor = Double.POSITIVE_INFINITY;
       List hijos = nodo.hijos();
       Iterator it = hijos.iterator();
+      profundidad = profundidad - 1;
       while(it.hasNext()){
-      
+        NodoJP hijo = (NodoJP)it.next();
+        valor = Min (valor, minimax(hijo, profundidad, !MinMax));
       }
+      return valor;
     }
-    return 0.0;
   }
 
   /**
@@ -187,13 +200,13 @@ class IAJP{
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
     int fichasRival = 0;
     int fichasMias = 0;
-    int turnoRival = turno == 1 ? 2 : 1;
+    int turnoRival = turno(turno) == 1 ? 2 : 1;
     if(turn == true){
       int i = 0;
       int j = 0;
       while(i<8){
         while(j<8){
-          if(tablero[i][j] == this.turno){
+          if(tablero[i][j] == turno(this.turno)){
             fichasMias = fichasMias+1;
           }
           if(tablero[i][j] == turnoRival){
@@ -207,7 +220,7 @@ class IAJP{
       int j = 0;
       while(i<8){
         while(j<8){
-          if(tablero[i][j] == this.turno){
+          if(tablero[i][j] == turno(this.turno)){
             fichasMias = fichasMias+1;
           }
           if(tablero[i][j] == turnoRival){
