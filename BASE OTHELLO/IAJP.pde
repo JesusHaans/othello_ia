@@ -116,7 +116,8 @@ class IAJP{
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
     double valor = 0.0;
     if(profundidad == 0 || nodo.esHoja() ){
-      return valorHeuri(nodo.tablero().tablero(),MinMax);
+      //return valorHeuri(nodo.tablero().tablero(),MinMax);
+      return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
     }
     if(MinMax){
       valor = Double.NEGATIVE_INFINITY;
