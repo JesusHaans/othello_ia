@@ -1,6 +1,7 @@
 TableroJP tablero;
 SensoresJP sensor;
 ActuadoresJP actuador;
+IAJP ia;
 
 boolean puedeJugarN;
 boolean puedeJugarB;
@@ -17,7 +18,10 @@ void setup(){
    tablero.tablero[4][4]=1; 
    puedeJugarN = true;
    puedeJugarB = true;
-   System.out.println("___________________\n Negras: " + sensor.puntajeN() + "\n Blancas: " + sensor.puntajeB() + "\n___________________\n"); 
+   ia = new IAJP(tablero.tablero(), tablero, 3, "");
+   System.out.println("___________________\n Negras: " 
+   + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+   +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
    
    
 }
@@ -40,7 +44,9 @@ void mousePressed(){
       if(actuador.jugar(mouseX/40,mouseY/40, turno)){
         turno = turno == 1? 2: 1;
         actuador.limpiarTablero();
-        System.out.println("___________________\n Negras: " + sensor.puntajeN() + "\n Blancas: " + sensor.puntajeB() + "\n___________________\n"); 
+           System.out.println("___________________\n Negras: " 
+             + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+             +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
       }
     }else{
       System.out.println("Lo siento no puedes jugar");

@@ -232,6 +232,49 @@ class IAJP{
     }
   } 
   
+    int heuristicaEsquinas(boolean turno, int[][] mundoActual){
+    int puntuacionActual = puntuar(turno, mundoActual);
+    int puntuacionAdversario = puntuar(!turno, mundoActual);
+    return puntuacionActual - puntuacionAdversario;
+  }
+  int puntuar(boolean turno, int[][] mundoActual){
+  int puntuacion = 0;
+  int turnoActual = turno(turno);
+  for(int i = 0; i < 8 ; i++){
+    for(int j = 0; j < 8; j++){
+      if(mundoActual[i][j] == turnoActual){
+        //Si es una esquina
+        if((i == 0 && j == 0)||
+           (i == 0 && j == 7)||
+           (i == 7 && j == 0)||
+           (i == 7 && j == 7)){
+             puntuacion += 1000000;
+        }else{
+          //Si rodea a una esquina
+        if((i == 1 && j == 0) || (i == 1 && j == 1) || (i == 0 && j == 1) ||
+           (i == 6 && j == 0) || (i == 6 && j == 1) || (i == 6 && j == 1) ||
+           (i == 1 && j == 7) || (i == 1 && j == 6) || (i == 0 && j == 6) ||
+           (i == 6 && j == 7) || (i == 6 && j == 6) || (i == 7 && j == 6) ){
+             puntuacion += 0;
+       }else{
+         //Si rodea el borde de la esquina
+       if((i == 2 && ( j == 0 || j == 1 || j == 2)) || (j == 2 && (i == 0 || i == 1))||
+          (i == 5 && ( j == 0 || j == 1 || j == 2)) || (j == 2 && (i == 6 || i == 7))||
+          (i == 2 && ( j == 7 || j == 6 || j == 5)) || (j == 5 && (i == 0 || i == 1))||
+          (i == 5 && ( j == 7 || j == 6 || j == 5)) || (j == 5 && (i == 6 || i == 7))){
+            puntuacion += 10000;
+       }else{
+         //Cualquier otra posicion
+         puntuacion += 100;
+       }}}//else
+        
+      }// if(ficha == turnoActual)
+    }
+  }
+  
+  return puntuacion;
+  }
+  
   /**
     * Método que determina el hijo del estado raiz que representará la jugada a realizar.
     */  
