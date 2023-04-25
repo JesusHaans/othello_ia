@@ -252,7 +252,7 @@ class IAJP{
            (i == 0 && j == 7)||
            (i == 7 && j == 0)||
            (i == 7 && j == 7)){
-             puntuacion += 1000000;
+             puntuacion += 100000000;
         }else{
           //Si rodea a una esquina
         if((i == 1 && j == 0) || (i == 1 && j == 1) || (i == 0 && j == 1) ||
@@ -266,7 +266,7 @@ class IAJP{
           (i == 5 && ( j == 0 || j == 1 || j == 2)) || (j == 2 && (i == 6 || i == 7))||
           (i == 2 && ( j == 7 || j == 6 || j == 5)) || (j == 5 && (i == 0 || i == 1))||
           (i == 5 && ( j == 7 || j == 6 || j == 5)) || (j == 5 && (i == 6 || i == 7))){
-            puntuacion += 10000;
+            puntuacion += 100000;
        }else{
          if(mundoActual[i][j] == 3 || mundoActual[i][j] == 4){
            puntuacion += 0;

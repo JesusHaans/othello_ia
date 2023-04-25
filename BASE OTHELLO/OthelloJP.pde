@@ -8,25 +8,22 @@ IAJP ia;
 boolean puedeJugarN;
 boolean puedeJugarB;
 int turno = 1;
+int nivel = 3;
 void setup(){
   size(320,320);
-  //noLoop();
-  //tablero = new TableroJP();
-  //sensor = new SensoresJP(tablero);
-  //actuador = new ActuadoresJP(tablero);
-  // tablero.tablero[3][3]=2;
-  // tablero.tablero[3][4]=1;
-  // tablero.tablero[4][3]=1;
-  // tablero.tablero[4][4]=2; 
-  // puedeJugarN = true;
-  // puedeJugarB = true;
-  // ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
-  // System.out.println("___________________\n Negras: " 
-  // + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
-  // +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
-  // sensor.posiblesJugadas(turno);
-   config();
-   
+
+   int seleccion = JOptionPane.showOptionDialog(
+   null,
+   "Seleccione opcion", 
+   "Selector de opciones",
+   JOptionPane.YES_NO_CANCEL_OPTION,
+   JOptionPane.QUESTION_MESSAGE,
+   null,    // null para icono por defecto.
+   new Object[] { "Nivel 1", "Nivel 2", "Nivel 3" },   // null para YES, NO y CANCEL
+   "opcion 1");
+    nivel = seleccion + 3;
+    if (seleccion == -1) System.exit(0);
+    config(nivel);
 }
 
 
@@ -46,7 +43,7 @@ void mousePressed(){
     //System.out.println("Ha ganado " + ganador);
     int n = JOptionPane.showConfirmDialog(null, "Ha ganado " + ganador + "Deseas reinicar?", "Juego Terminado", JOptionPane.YES_NO_OPTION);
     if(n == 0){
-      config();
+      config(nivel);
     }else{
        System.exit(0);
     }
@@ -86,7 +83,7 @@ void mousePressed(){
   
   }
   
-  void config(){
+  void config(int nivel){
    tablero = new TableroJP();
    sensor = new SensoresJP(tablero);
    actuador = new ActuadoresJP(tablero);
@@ -96,7 +93,7 @@ void mousePressed(){
    tablero.tablero[4][4]=2; 
    puedeJugarN = true;
    puedeJugarB = true;
-   ia = new IAJP(tablero.tablero(), new TableroJP(), 6, "");
+   ia = new IAJP(tablero.tablero(), new TableroJP(), nivel, "");
    System.out.println("___________________\n Negras: " 
    + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
    +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
