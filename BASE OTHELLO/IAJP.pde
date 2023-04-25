@@ -33,9 +33,9 @@ class IAJP{
    * Devuelve una matriz del tablero con la jugada realizada.
    */
   int[][] realizarJugada(int[][] mundo, boolean turn){
-    //Implementar
-    //Crear arbol
-    return mundo;
+    this.turno = turn;
+    tablero.ponerTablero(mundo);
+    return dondeTirar(turn);
   }
   
   /**
@@ -60,7 +60,7 @@ class IAJP{
    */
   void crearArbol(boolean turn){
     iniciarArbol();//iniciamos la estructura
-    crearRamas(arbol.raiz(), deep, turno);//Comenzamos a abrir las ramas sobre la estructura que creamos
+    crearRamas(arbol.raiz(), deep, turn);//Comenzamos a abrir las ramas sobre la estructura que creamos
     
   }
   
@@ -87,7 +87,7 @@ class IAJP{
         for(int j = 0; j<8; j++){
           //Revisión de casilla
           if(nodo.tablero().ficha(i,j) == turno(turn) + 2){//si esta casilla es una posible jugada
-            
+            tablero.ponerTablero(copyMatrix(nodo.tablero().tablero()));
             //Adición de un nodo
             actuador.jugar(i, j, turno(turn));//jugamos esa jugada para hacer un nodo
             TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));//Creamos el objeto Tablero para el Nodo con la copia del mundo con su jugada
@@ -95,7 +95,8 @@ class IAJP{
             nodo.agregarHijo(hijo);// Agregamos el nuevo nodo a los hijos del nodo actual
             
             //Reset del tablero para usar sensores y actuadores con el nodo actual(padre)
-            tablero.ponerTablero(nodo.tablero().tablero());//ponemos el papa en nuestro tablero global de nuevo
+            
+            actuador.limpiarTablero();
             buscarJugadas(tablero.tablero(), turn);//regresamos el tablero al tablero con las posibles jugadas del nodo actual(padre)
           }
         }
@@ -116,8 +117,8 @@ class IAJP{
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
     double valor = 0.0;
     if(profundidad == 0 || nodo.esHoja() ){
-      //return valorHeuri(nodo.tablero().tablero(),MinMax);
-      return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
+     // return valorHeuri(nodo.tablero().tablero(),MinMax);
+     return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
     }
     if(MinMax){
       valor = Double.NEGATIVE_INFINITY;
@@ -265,9 +266,12 @@ class IAJP{
           (i == 5 && ( j == 7 || j == 6 || j == 5)) || (j == 5 && (i == 6 || i == 7))){
             puntuacion += 10000;
        }else{
+         if(mundoActual[i][j] == 3 || mundoActual[i][j] == 4){
+           puntuacion += 0;
+         }else{
          //Cualquier otra posicion
          puntuacion += 100;
-       }}}//else
+         }}}}//else
         
       }// if(ficha == turnoActual)
     }
@@ -279,7 +283,7 @@ class IAJP{
   /**
     * Método que determina el hijo del estado raiz que representará la jugada a realizar.
     */  
-  int[][] dondeTirar(){
+  int[][] dondeTirar(boolean turno){
     //SE IMPLEMENTARÁ RERGESANDO DE VACACIONES
     crearArbol(turno);
     List jugadas = arbol.raiz().hijos();
@@ -287,8 +291,9 @@ class IAJP{
     int maximo = 0;
     Iterator it = jugadas.iterator();
     for(int i=0;i<jugadas.size();i++){
-      NodoJP nodo = (NodoJP) it.next();
-      double auxd = minimax(nodo,deep,true);
+      //NodoJP nodo = (NodoJP) it.next();
+      NodoJP nodo = (NodoJP) jugadas.get(i);
+      double auxd = minimax(nodo,deep,turno);
       resultadosminiMax[i] = auxd;
     }
     double aux = resultadosminiMax[0];
