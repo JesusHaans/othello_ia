@@ -116,7 +116,7 @@ class IAJP{
   double minimax(NodoJP nodo, int profundidad, boolean MinMax) {        
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
     double valor = 0.0;
-    if(profundidad == 0 || nodo.esHoja() ){
+    if(profundidad == 0 || nodo.esHoja(MinMax) ){
      // return valorHeuri(nodo.tablero().tablero(),MinMax);
      return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
     }

@@ -26,6 +26,11 @@ class NodoJP{
    return this.hijos.size() == 0; 
   }
   
+  public boolean esHoja(boolean turno){
+    SensoresJP sensor = new SensoresJP(tablero);
+    return turno? sensor.numPosiblesJugadas(1) == 0 : sensor.numPosiblesJugadas(1) == 0; 
+  }
+  
   public NodoJP padre(){
     return this.padre;
   }
