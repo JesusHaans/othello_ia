@@ -21,7 +21,7 @@ void setup(){
    null,    // null para icono por defecto.
    new Object[] { "Nivel 1", "Nivel 2", "Nivel 3" },   // null para YES, NO y CANCEL
    "opcion 1");
-    nivel = seleccion + 3;
+    nivel = seleccion + 60;
     if (seleccion == -1) System.exit(0);
     config(nivel);
 }
