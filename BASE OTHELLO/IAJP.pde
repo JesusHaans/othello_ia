@@ -234,10 +234,12 @@ class IAJP{
     }
   } 
   
-    int heuristicaEsquinas(boolean turno, int[][] mundoActual){
+ int heuristicaEsquinas(boolean turno, int[][] mundoActual){
     int puntuacionActual = puntuar(turno, mundoActual);
     int puntuacionAdversario = puntuar(!turno, mundoActual);
-    return puntuacionActual - puntuacionAdversario;
+    return turno ? 
+           puntuacionActual - puntuacionAdversario
+           : puntuacionAdversario - puntuacionActual;
   }
   int puntuar(boolean turno, int[][] mundoActual){
   int puntuacion = 0;

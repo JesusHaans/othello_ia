@@ -12,10 +12,10 @@ void setup(){
   tablero = new TableroJP();
   sensor = new SensoresJP(tablero);
   actuador = new ActuadoresJP(tablero);
-   tablero.tablero[3][3]=1;
-   tablero.tablero[3][4]=2;
-   tablero.tablero[4][3]=2;
-   tablero.tablero[4][4]=1; 
+   tablero.tablero[3][3]=2;
+   tablero.tablero[3][4]=1;
+   tablero.tablero[4][3]=1;
+   tablero.tablero[4][4]=2; 
    puedeJugarN = true;
    puedeJugarB = true;
    ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
