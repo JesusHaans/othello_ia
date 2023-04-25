@@ -34,43 +34,46 @@ void draw(){
 }
 
 void mousePressed(){
+  int puntosN = sensor.puntajeN();
+  int puntosB = sensor.puntajeB();
   puedeJugarN = sensor.numPosiblesJugadas(1) > 0 ;
   puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;
-  if(!puedeJugarN && !puedeJugarB){
-    String ganador = sensor.puntajeN() > sensor.puntajeB() ? "Negro" : "Blanco";
+  if((puntosN == 0 || puntosB == 0) ||
+     (!puedeJugarN && !puedeJugarB)){
+    String ganador = puntosN > puntosB ? "Negro" : "Blanco";
     System.out.println("Ha ganado " + ganador);
   }else{
-    //boolean verif = turno == 1 ?  : puedeJugarB;
-    if(actuador.jugar(mouseX/40,mouseY/40, turno)){
-      System.out.println("___________________\n Negras: " 
-             + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
-             +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
-             ia.printT("", tablero.tablero());
-      //turno = turno == 1? 2: 1;
-      actuador.limpiarTablero();
-      ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
-      tablero.ponerTablero( ia.realizarJugada(tablero.tablero(), false));
-      actuador.limpiarTablero();
-      sensor.posiblesJugadas(turno);
+    if(puedeJugarN){
+      if(actuador.jugar(mouseX/40,mouseY/40, turno)){
+        System.out.println("___________________\n Negras: " 
+               + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+               +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+               ia.printT("", tablero.tablero());
+        //turno = turno == 1? 2: 1;
+        
+      }
+     }else{
+        System.out.println("No puedes jugar :c ");
+     }
+     actuador.limpiarTablero();
+     sensor.posiblesJugadas(2);
+     puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;
+     System.out.println(puedeJugarB);
+     
+     if(puedeJugarB){
+       ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
+        tablero.ponerTablero( ia.realizarJugada(tablero.tablero(), false));
+        
+        
+        System.out.println("RIVAL ACABA DE JUGAR "); 
+        ia.printT("", tablero.tablero());
+     }else{
+        System.out.println("La IA no puede jugar :c ");
+     }
+     
+     actuador.limpiarTablero();
+     sensor.posiblesJugadas(turno);
       
-      //if(turno == 2){
-      //  System.out.println("va a jugar blanco");
-      //  tablero.ponerTablero( ia.realizarJugada(tablero.tablero(), false));
-      //  turno = turno == 1? 2: 1;
-      //  actuador.limpiarTablero();
-      //}
-      //if(actuador.jugar(mouseX/40,mouseY/40, turno)){
-      //  turno = turno == 1? 2: 1;
-      //  actuador.limpiarTablero();
-           System.out.println("RIVAL ACABA DE JUGAR "); 
-             ia.printT("", tablero.tablero());
-      //}
-      
-    }else{
-      System.out.println("Lo siento no puedes jugar");
-      turno = turno == 1? 2: 1;
     }
-  }
   //tablero.display();
-
-}
+  }
