@@ -238,7 +238,7 @@ class IAJP{
     int puntuacionActual = puntuar(turno, mundoActual);
     int puntuacionAdversario = puntuar(!turno, mundoActual);
     return turno ? 
-           puntuacionActual - puntuacionAdversario
+           puntuacionActual - puntuacionAdversario 
            : puntuacionAdversario - puntuacionActual;
   }
   int puntuar(boolean turno, int[][] mundoActual){
