@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 TableroJP tablero;
 SensoresJP sensor;
 ActuadoresJP actuador;
@@ -9,21 +11,21 @@ int turno = 1;
 void setup(){
   size(320,320);
   //noLoop();
-  tablero = new TableroJP();
-  sensor = new SensoresJP(tablero);
-  actuador = new ActuadoresJP(tablero);
-   tablero.tablero[3][3]=2;
-   tablero.tablero[3][4]=1;
-   tablero.tablero[4][3]=1;
-   tablero.tablero[4][4]=2; 
-   puedeJugarN = true;
-   puedeJugarB = true;
-   ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
-   System.out.println("___________________\n Negras: " 
-   + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
-   +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
-   sensor.posiblesJugadas(turno);
-   
+  //tablero = new TableroJP();
+  //sensor = new SensoresJP(tablero);
+  //actuador = new ActuadoresJP(tablero);
+  // tablero.tablero[3][3]=2;
+  // tablero.tablero[3][4]=1;
+  // tablero.tablero[4][3]=1;
+  // tablero.tablero[4][4]=2; 
+  // puedeJugarN = true;
+  // puedeJugarB = true;
+  // ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
+  // System.out.println("___________________\n Negras: " 
+  // + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+  // +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+  // sensor.posiblesJugadas(turno);
+   config();
    
 }
 
@@ -41,7 +43,13 @@ void mousePressed(){
   if((puntosN == 0 || puntosB == 0) ||
      (!puedeJugarN && !puedeJugarB)){
     String ganador = puntosN > puntosB ? "Negro" : "Blanco";
-    System.out.println("Ha ganado " + ganador);
+    //System.out.println("Ha ganado " + ganador);
+    int n = JOptionPane.showConfirmDialog(null, "Ha ganado " + ganador + "Deseas reinicar?", "Juego Terminado", JOptionPane.YES_NO_OPTION);
+    if(n == 0){
+      config();
+    }else{
+       System.exit(0);
+    }
   }else{
     if(puedeJugarN){
       if(actuador.jugar(mouseX/40,mouseY/40, turno)){
@@ -75,5 +83,32 @@ void mousePressed(){
      sensor.posiblesJugadas(turno);
       
     }
-  //tablero.display();
+    if((puntosN == 0 || puntosB == 0) ||
+     (!puedeJugarN && !puedeJugarB)){
+    String ganador = puntosN > puntosB ? "Negro" : "Blanco";
+    //System.out.println("Ha ganado " + ganador);
+    int n = JOptionPane.showConfirmDialog(null, "Ha ganado " + ganador + "Deseas reinicar?", "Juego Terminado", JOptionPane.YES_NO_OPTION);
+    if(n == 0){
+      config();
+    }else{
+       System.exit(0);
+    }
+  }
+  }
+  
+  void config(){
+   tablero = new TableroJP();
+   sensor = new SensoresJP(tablero);
+   actuador = new ActuadoresJP(tablero);
+   tablero.tablero[3][3]=2;
+   tablero.tablero[3][4]=1;
+   tablero.tablero[4][3]=1;
+   tablero.tablero[4][4]=2; 
+   puedeJugarN = true;
+   puedeJugarB = true;
+   ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
+   System.out.println("___________________\n Negras: " 
+   + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+   +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+   sensor.posiblesJugadas(turno); 
   }
