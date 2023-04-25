@@ -9,7 +9,7 @@ class IAJP{
   boolean turno;          //Turno que juega la IA
   int[][] mundo;          //Tablero actual
   TableroJP tablero;            //Ejemplar de tablero para las funciones necesarias
-  int deep = 2;         //Profundidad del árbbol.
+  int deep;         //Profundidad del árbbol.
   double heuristica = Double.POSITIVE_INFINITY; //Valor heurístico iinicial.
   ArbolJP arbol;
   SensoresJP sensor;
@@ -291,7 +291,7 @@ class IAJP{
     List jugadas = arbol.raiz().hijos();
     double[] resultadosminiMax = new double[jugadas.size()];
     int maximo = 0;
-    Iterator it = jugadas.iterator();
+    //Iterator it = jugadas.iterator();
     for(int i=0;i<jugadas.size();i++){
       //NodoJP nodo = (NodoJP) it.next();
       NodoJP nodo = (NodoJP) jugadas.get(i);
