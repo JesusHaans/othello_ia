@@ -61,6 +61,7 @@ void mousePressed(){
            System.out.println("___________________\n Negras: " 
              + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
              +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+             ia.printT("", tablero.tablero());
       //}
       
     }else{
