@@ -42,6 +42,10 @@ void mousePressed(){
   }else{
     //boolean verif = turno == 1 ?  : puedeJugarB;
     if(actuador.jugar(mouseX/40,mouseY/40, turno)){
+      System.out.println("___________________\n Negras: " 
+             + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
+             +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+             ia.printT("", tablero.tablero());
       //turno = turno == 1? 2: 1;
       actuador.limpiarTablero();
       ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
@@ -58,9 +62,7 @@ void mousePressed(){
       //if(actuador.jugar(mouseX/40,mouseY/40, turno)){
       //  turno = turno == 1? 2: 1;
       //  actuador.limpiarTablero();
-           System.out.println("___________________\n Negras: " 
-             + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
-             +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
+           System.out.println("RIVAL ACABA DE JUGAR "); 
              ia.printT("", tablero.tablero());
       //}
       
