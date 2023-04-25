@@ -59,7 +59,7 @@ void mousePressed(){
                ia.printT("", tablero.tablero());
         //turno = turno == 1? 2: 1;
         
-      }
+      }else{return;}
      }else{
         System.out.println("No puedes jugar :c ");
      }
