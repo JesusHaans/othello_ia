@@ -83,17 +83,7 @@ void mousePressed(){
      sensor.posiblesJugadas(turno);
       
     }
-    if((puntosN == 0 || puntosB == 0) ||
-     (!puedeJugarN && !puedeJugarB)){
-    String ganador = puntosN > puntosB ? "Negro" : "Blanco";
-    //System.out.println("Ha ganado " + ganador);
-    int n = JOptionPane.showConfirmDialog(null, "Ha ganado " + ganador + "Deseas reinicar?", "Juego Terminado", JOptionPane.YES_NO_OPTION);
-    if(n == 0){
-      config();
-    }else{
-       System.exit(0);
-    }
-  }
+  
   }
   
   void config(){
@@ -106,7 +96,7 @@ void mousePressed(){
    tablero.tablero[4][4]=2; 
    puedeJugarN = true;
    puedeJugarB = true;
-   ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
+   ia = new IAJP(tablero.tablero(), new TableroJP(), 6, "");
    System.out.println("___________________\n Negras: " 
    + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
    +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
