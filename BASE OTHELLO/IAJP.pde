@@ -291,7 +291,7 @@ class IAJP{
     List jugadas = arbol.raiz().hijos();
     double[] resultadosminiMax = new double[jugadas.size()];
     int maximo = 0;
-    //Iterator it = jugadas.iterator();
+    Iterator it = jugadas.iterator();
     for(int i=0;i<jugadas.size();i++){
       //NodoJP nodo = (NodoJP) it.next();
       NodoJP nodo = (NodoJP) jugadas.get(i);
