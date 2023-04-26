@@ -25,6 +25,7 @@ class IAJP{
     actuador = new ActuadoresJP(this.tablero);
     this.deep = deep;
     this.nombre = nom;
+    turno = false;
   }
   
   /**
@@ -113,43 +114,7 @@ class IAJP{
     }
   }  
   
-  ///**
-  // * Método que crea todas las ramas del árbol
-  // */
-  //void crearRamass(NodoJP nodo, int profun, boolean turn){
-  //  if(profun == 0 || nodo.esHoja(turn)){
-  //    return;
-  //  }else{
-  //    for(int i = 0; i<8; i++){
-  //      for(int j = 0; j<8; j++){
-  //        //Revisión de casilla
-  //        if(nodo.tablero().ficha(i,j) == turno(turn) + 2){//si esta casilla es una posible jugada
-  //          tablero.ponerTablero(copyMatrix(nodo.tablero().tablero()));
-  //          //Adición de un nodo
-  //          actuador.jugar(i, j, turno(turn));//jugamos esa jugada para hacer un nodo
-  //          TableroJP tableroHijo = new TableroJP(copyMatrix(tablero.tablero()));//Creamos el objeto Tablero para el Nodo con la copia del mundo con su jugada
-  //          NodoJP hijo = new NodoJP(nodo, tableroHijo );//Creamos el objeto Nodo con su tablero e indicando el padre
-  //          nodo.agregarHijo(hijo);// Agregamos el nuevo nodo a los hijos del nodo actual
-            
-  //          //Reset del tablero para usar sensores y actuadores con el nodo actual(padre)
-            
-  //          actuador.limpiarTablero();
-  //          buscarJugadas(tablero.tablero(), turn);//regresamos el tablero al tablero con las posibles jugadas del nodo actual(padre)
-  //        }
-  //      }
-  //    }
-  //    if(!nodo.esHoja(turn))
-  //    {
-  //      for(int i = 0; i < nodo.hijos().size(); i++){
-  //        NodoJP hijo = (NodoJP) nodo.hijos().get(i);//obtenemos un hijo i
-  //        tablero.ponerTablero(hijo.tablero().tablero());//Asignamos su tablero al tablero actual para usar sensores y actuadores
-  //        buscarJugadas(tablero.tablero(), !turn);//Buscamos las posibles jugadas, consideremos que cambiamos de turno
-  //        crearRamas(hijo, profun - 1, !turn);//Expandimos el arbol con sus posibles jugadas
-  //      }
-  //    }
-  //  }
-    
-  //}
+  
   
   double minimax(NodoJP nodo, int profundidad, boolean MinMax) {        
     //SE IMPLEMENTARÁ REGRESANDO DE VACACIONES NO SE PREOCUPEN
@@ -275,6 +240,7 @@ class IAJP{
  int heuristicaEsquinas(boolean turno, int[][] mundoActual){
     int puntuacionActual = puntuar(turno, mundoActual);
     int puntuacionAdversario = puntuar(!turno, mundoActual);
+    //return puntuacionActual;
     return turno ? 
            puntuacionActual - puntuacionAdversario 
            : puntuacionAdversario - puntuacionActual;
@@ -333,7 +299,7 @@ class IAJP{
     for(int i=0;i<jugadas.size();i++){
       //NodoJP nodo = (NodoJP) it.next();
       NodoJP nodo = (NodoJP) jugadas.get(i);
-      double auxd = minimax(nodo,deep,turno);
+      double auxd = decisionMinimax(nodo,deep,turno);
       resultadosminiMax[i] = auxd;
     }
     double aux = resultadosminiMax[0];
@@ -355,4 +321,40 @@ class IAJP{
    return b? 1: 2;
    }
    
+
+double maxValor(NodoJP nodo, int profundidad, boolean MinMax){
+  if(profundidad == 0 || nodo.esHoja(MinMax) ){
+    return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
+  }
+  double valor = Double.NEGATIVE_INFINITY;
+  List hijos = nodo.hijos();
+  Iterator it = hijos.iterator();
+  profundidad = profundidad - 1;
+  while(it.hasNext()){
+    NodoJP hijo = (NodoJP)it.next();
+    valor = Max(valor, minValor(hijo, profundidad, !MinMax));
+  }
+  return valor;
+}
+
+double minValor(NodoJP nodo, int profundidad, boolean MinMax){
+  if(profundidad == 0 || nodo.esHoja(MinMax) ){
+    return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
+  }
+  double valor = Double.POSITIVE_INFINITY;
+  List hijos = nodo.hijos();
+  Iterator it = hijos.iterator();
+  profundidad = profundidad - 1;
+  while(it.hasNext()){
+    NodoJP hijo = (NodoJP)it.next();
+    valor = Min(valor, maxValor(hijo, profundidad, !MinMax));
+  }
+  return valor;
+}
+
+double decisionMinimax(NodoJP nodo, int profundidad, boolean MinMax){
+  return maxValor(nodo, profundidad, MinMax);
+
+}
+
 }

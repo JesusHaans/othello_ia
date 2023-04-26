@@ -21,7 +21,7 @@ void setup(){
    null,    // null para icono por defecto.
    new Object[] { "Nivel 1", "Nivel 2", "Nivel 3" },   // null para YES, NO y CANCEL
    "opcion 1");
-    nivel = seleccion + 1;
+    nivel = seleccion + 3;
     if (seleccion == -1) System.exit(0);
     config(nivel);
 }
@@ -63,10 +63,11 @@ void mousePressed(){
      actuador.limpiarTablero();
      sensor.posiblesJugadas(2);
      puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;
+     
      System.out.println(puedeJugarB);
      
      if(puedeJugarB){
-       ia = new IAJP(tablero.tablero(), new TableroJP(), 3, "");
+       ia = new IAJP(tablero.tablero(), new TableroJP(), nivel, "");
         tablero.ponerTablero( ia.realizarJugada(tablero.tablero(), false));
         
         
