@@ -328,7 +328,9 @@ class IAJP{
    return b? 1: 2;
    }
    
-
+/**
+* método de valor máximo para minimax
+*/
 double maxValor(NodoJP nodo, int profundidad, boolean MinMax){
   if(profundidad == 0 || nodo.esHoja(MinMax) ){
     return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
@@ -344,6 +346,9 @@ double maxValor(NodoJP nodo, int profundidad, boolean MinMax){
   return valor;
 }
 
+/**
+* método de valor minimo para minimax
+*/
 double minValor(NodoJP nodo, int profundidad, boolean MinMax){
   if(profundidad == 0 || nodo.esHoja(MinMax) ){
     return heuristicaEsquinas(MinMax, nodo.tablero().tablero());
@@ -359,6 +364,9 @@ double minValor(NodoJP nodo, int profundidad, boolean MinMax){
   return valor;
 }
 
+/**
+* método que da el valor resultado del minimax
+*/
 double decisionMinimax(NodoJP nodo, int profundidad, boolean MinMax){
   return maxValor(nodo, profundidad, MinMax);
 
