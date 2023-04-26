@@ -243,7 +243,7 @@ class IAJP{
     //return puntuacionActual;
     return turno ? 
            puntuacionActual - puntuacionAdversario 
-           : puntuacionAdversario - puntuacionActual;
+           : -puntuacionAdversario;
   }
   int puntuar(boolean turno, int[][] mundoActual){
   int puntuacion = 0;
