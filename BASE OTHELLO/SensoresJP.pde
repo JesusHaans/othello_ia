@@ -7,10 +7,16 @@ class SensoresJP{
  this.tablero = tablero;
  }
  
+  /**
+  * Este método nos dice cuál es el turno del contrincante
+  */
  int turnoContrario(int turno){
  return turno == 1 ? 2: 1;
  }
  
+ /**
+  *  Este método nos dice cuántas fichas negras hay en el tablero
+  */
  int puntajeN(){
    int puntos = 0;
   for(int i = 0; i < 8 ; i++){
@@ -20,7 +26,10 @@ class SensoresJP{
   }
   return puntos;
  }
- 
+
+  /**
+  *  Este método nos dice cuántas fichas blancas hay en el tablero.
+  */
  int puntajeB(){
    int puntos = 0;
   for(int i = 0; i < 8 ; i++){
@@ -31,6 +40,9 @@ class SensoresJP{
   return puntos;
  }
  
+ /**
+  * Este método pone una posible jugada Vertical arriba.
+  */
  void jugadaVAr(int x, int y, int turno){
  int patron = turno;
  for(int i = y; i >= 0 ; i--){
@@ -52,6 +64,9 @@ class SensoresJP{
  }
  }
  
+  /**
+  * Este método pone una posible jugada vertical inferior.
+  */
  void jugadaVAb(int x, int y, int turno){
  int patron = turno;
  for(int i = y; i < 8 ; i++){
@@ -73,6 +88,9 @@ class SensoresJP{
  }
  }
  
+ /**
+  * Este método pone una posible jugada horizontal izquierda.
+  */
  void jugadaHI(int x, int y, int turno){
  int patron = turno;
  for(int i = x; i >= 0 ; i--){
@@ -93,7 +111,10 @@ class SensoresJP{
    }
  }
  }
- 
+
+  /**
+  * Este método pone una posible jugada horizontal derecha.
+  */
  void jugadaHD(int x, int y, int turno){
  int patron = turno;
  for(int i = x; i < 8 ; i++){
@@ -115,6 +136,9 @@ class SensoresJP{
  }
  }
  
+  /**
+  * Este método pone una posible jugada diagonal superior izquierda 
+  */
  void jugadaDArI(int x, int y, int turno){
  int patron = turno;
  int i = x;
@@ -140,6 +164,9 @@ class SensoresJP{
  }
  }
  
+  /**
+  * Este método pone una posible jugada diagonal superior derecha.
+  */
  void jugadaDArD(int x, int y, int turno){
  int patron = turno;
  int i = x;
@@ -165,6 +192,9 @@ class SensoresJP{
  }
  }
  
+ /**
+  * Este método pone una posible jugada diagonal inferior izquierda. 
+  */
  void jugadaDAbI(int x, int y, int turno){
  int patron = turno;
  int i = x;
@@ -189,7 +219,9 @@ class SensoresJP{
    j++;
  }
  }
- 
+  /**
+  * Este método pone una posible jugada diagonal inferior derecha. 
+  */
   void jugadaDAbD(int x, int y, int turno){
  int patron = turno;
  int i = x;
@@ -215,6 +247,9 @@ class SensoresJP{
  }
  }
  
+ /**
+  * Este método pone las posibles jugadas.
+  */
  void posiblesJugadas(int turno){
    for(int i = 0; i < 8; i++){
      for(int j = 0; j < 8; j++){
@@ -232,6 +267,9 @@ class SensoresJP{
    }
  }
  
+  /**
+  * Este método nos dice cuántas posibles jugadas  tiene un turno
+  */
  int numPosiblesJugadas(int turno){
    int c = 0;
    for(int i = 0; i < 8; i++){

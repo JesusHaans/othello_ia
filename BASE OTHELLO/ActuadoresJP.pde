@@ -3,14 +3,21 @@ class ActuadoresJP{
   TableroJP tablero;
   public static final  int VACIA = 0;
  
+ //contructor
  public ActuadoresJP(TableroJP tablero){
  this.tablero = tablero;
  }
  
+ /**
+ * Este método nos dice cuál es el turno contrario al dado
+ */
  int turnoContrario(int turno){
  return turno == 1 ? 2: 1;
  }
  
+ /**
+ * Este método nos ayuda a colocar las fichas jugadas
+ */
  void colocar(int turno){
   for(int i = 0; i < 8 ; i++){
      for(int j = 0; j < 8; j++){
@@ -21,6 +28,9 @@ class ActuadoresJP{
    } 
  }
  
+ /**
+  * Este método nos ayuda a verificar que la direccion vertical arriba sea jugable
+  */
  boolean verificarVAr(int x, int y, int turno){
   boolean verificacion = true;
   for(int j = y + 1; j < 8; j++){
@@ -30,6 +40,9 @@ class ActuadoresJP{
   return false;
  }
  
+/**
+* Este método juega fichas en la dirección vertical arriba, si es posible
+*/
  void jugarVAr(int x, int y, int turno){
    if(verificarVAr(x,y,turno)){
     for(int j = y + 1; j < 8; j++){
@@ -41,6 +54,9 @@ class ActuadoresJP{
   }
  }
  
+  /**
+  * Este método nos ayuda a verificar que la direccion vertical abajo sea jugable
+  */
   boolean verificarVAb(int x, int y, int turno){
   boolean verificacion = true;
   for(int j = y - 1; j >= 0; j--){
@@ -50,6 +66,9 @@ class ActuadoresJP{
   return false;
  }
  
+/**
+* Este método juega fichas en la dirección vertical abajo, si es posible
+*/
  void jugarVAb(int x, int y, int turno){
    if(verificarVAb(x,y,turno)){
     for(int j = y - 1; j >=0; j--){
@@ -61,6 +80,9 @@ class ActuadoresJP{
   }
  }
  
+  /**
+  * Este método nos ayuda a verificar que la direccion horizontal izquierda sea jugable
+  */
   boolean verificarHI(int x, int y, int turno){
   boolean verificacion = true;
   for(int i = x + 1;  i < 8; i++){
@@ -69,7 +91,10 @@ class ActuadoresJP{
   }
   return false;
  }
- 
+
+/**
+* Este método juega fichas en la dirección horizontal izquierda, si es posible
+*/
  void jugarHI(int x, int y, int turno){
    if(verificarHI(x,y,turno)){
     for(int i = x + 1;  i < 8; i++){
@@ -81,6 +106,9 @@ class ActuadoresJP{
   }
  }
  
+   /**
+  * Este método nos ayuda a verificar que la direccion horizontal derecha sea jugable
+  */
    boolean verificarHD(int x, int y, int turno){
   boolean verificacion = true;
   for(int i = x - 1;  i >= 0; i--){
@@ -89,7 +117,10 @@ class ActuadoresJP{
   }
   return false;
  }
- 
+
+/**
+* Este método juega fichas en la dirección horizontal derecha, si es posible
+*/
  void jugarHD(int x, int y, int turno){
    if(verificarHD(x,y,turno)){
     for(int i = x - 1;  i >= 0; i--){
@@ -101,6 +132,9 @@ class ActuadoresJP{
   }
  }
  
+   /**
+  * Este método nos ayuda a verificar que la direccion diagonal superior izquierda sea jugable
+  */
  boolean verificarDArI(int x, int y, int turno){
   boolean verificacion = true;
   int i = x + 1;
@@ -114,6 +148,9 @@ class ActuadoresJP{
   return false;
  }
  
+/**
+* Este método juega fichas en la dirección diagonal superior izquierda, si es posible
+*/
  void jugarDArI(int x, int y, int turno){
    if(verificarDArI(x,y,turno)){
     int i = x + 1;
@@ -129,6 +166,9 @@ class ActuadoresJP{
   }
  }
  
+    /**
+  * Este método nos ayuda a verificar que la direccion diagonal superior derecha sea jugable
+  */
  boolean verificarDArD(int x, int y, int turno){
   boolean verificacion = true;
   int i = x - 1;
@@ -142,6 +182,9 @@ class ActuadoresJP{
   return false;
  }
  
+/**
+* Este método juega fichas en la dirección diagonal superior derecha, si es posible
+*/
  void jugarDArD(int x, int y, int turno){
    if(verificarDArD(x,y,turno)){
     int i = x - 1;
@@ -157,6 +200,9 @@ class ActuadoresJP{
   }
  }
 
+   /**
+  * Este método nos ayuda a verificar que la direccion diagonal inferior izquierda sea jugable
+  */
   boolean verificarDAbI(int x, int y, int turno){
   boolean verificacion = true;
   int i = x + 1;
@@ -169,7 +215,10 @@ class ActuadoresJP{
   }
   return false;
  }
- 
+
+/**
+* Este método juega fichas en la dirección diagonal inferior izquierda, si es posible
+*/
  void jugarDAbI(int x, int y, int turno){
    if(verificarDAbI(x,y,turno)){
     int i = x + 1;
@@ -185,6 +234,10 @@ class ActuadoresJP{
   }
  }
  
+ 
+   /**
+  * Este método nos ayuda a verificar que la direccion diagonal inferior derecha sea jugable
+  */
  boolean verificarDAbD(int x, int y, int turno){
   boolean verificacion = true;
   int i = x - 1;
@@ -197,7 +250,10 @@ class ActuadoresJP{
   }
   return false;
  }
- 
+
+/**
+* Este método juega fichas en la dirección diagonal inferior derecha, si es posible
+*/
  void jugarDAbD(int x, int y, int turno){
    if(verificarDAbD(x,y,turno)){
     int i = x - 1;
@@ -216,7 +272,9 @@ class ActuadoresJP{
   
  
 
- 
+ /**
+ * Este método juega la casilla x,y y toma las casillas que se puedan.
+ */
  boolean jugar(int x, int y, int turno){
      if(tablero.ficha(x,y) == 3 || tablero.ficha(x,y) == 4){
          jugarVAr(x,y,turno);
@@ -234,6 +292,10 @@ class ActuadoresJP{
        return false;
      }
  }
+ 
+ /**
+  * Este método quita las posibles jugadas del tablero
+  */
  void limpiarTablero(){
    for(int i = 0; i < 8; i++){
      for(int j = 0; j < 8; j++){
