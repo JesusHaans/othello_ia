@@ -236,7 +236,10 @@ class IAJP{
       return fichasRival - fichasMias;
     }
   } 
-  
+
+ /**
+  * Heurística basada en la conquista de las esquinas
+  */
  int heuristicaEsquinas(boolean turno, int[][] mundoActual){
     int puntuacionNegro = puntuar(turno, mundoActual);
     int puntuacionBlanco = puntuar(!turno, mundoActual);
@@ -245,6 +248,10 @@ class IAJP{
            puntuacionNegro - puntuacionBlanco
            : puntuacionBlanco - puntuacionNegro;
   }
+  
+ /**
+  * Este método nos da una puntuación del tablero dado, con la técnica de conquistar esquinas.
+  */
   int puntuar(boolean turno, int[][] mundoActual){
   int puntuacion = 0;
   int turnoActual = turno(turno);

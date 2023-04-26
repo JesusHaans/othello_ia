@@ -14,8 +14,8 @@ void setup(){
 
    int seleccion = JOptionPane.showOptionDialog(
    null,
-   "Seleccione opcion", 
-   "Selector de opciones",
+   "Selección de nivel", 
+   "Seleccione el nivel que desea jugar",
    JOptionPane.YES_NO_CANCEL_OPTION,
    JOptionPane.QUESTION_MESSAGE,
    null,    // null para icono por defecto.
@@ -23,6 +23,7 @@ void setup(){
    "opcion 1");
     nivel = seleccion + 3;
     if (seleccion == -1) System.exit(0);
+    
     config(nivel);
 }
 
@@ -33,40 +34,43 @@ void draw(){
 }
 
 void mousePressed(){
-  int puntosN = sensor.puntajeN();
-  int puntosB = sensor.puntajeB();
-  puedeJugarN = sensor.numPosiblesJugadas(1) > 0 ;
-  puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;
-  if((puntosN == 0 || puntosB == 0) ||
-     (!puedeJugarN && !puedeJugarB)){
+  int puntosN = sensor.puntajeN();//fichas negras
+  int puntosB = sensor.puntajeB();//fichas blancas
+  puedeJugarN = sensor.numPosiblesJugadas(1) > 0 ;//se puede jugar ficha negra?
+  puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;//se puede jugar ficha blanca?
+ 
+  if((puntosN == 0 || puntosB == 0) ||//Si uno se queda sin fichas
+     (!puedeJugarN && !puedeJugarB)){//Si ya ninguno puede jugar
     String ganador = puntosN > puntosB ? "Negro" : "Blanco";
-    //System.out.println("Ha ganado " + ganador);
+    
+    //mostrando ganador
     int n = JOptionPane.showConfirmDialog(null, "Ha ganado " + ganador + "Deseas reinicar?", "Juego Terminado", JOptionPane.YES_NO_OPTION);
     if(n == 0){
       config(nivel);
     }else{
        System.exit(0);
     }
-  }else{
-    if(puedeJugarN){
+  }else{//Si hay jugadas aun
+    if(puedeJugarN){//Si puede jugar fichas negras
       if(actuador.jugar(mouseX/40,mouseY/40, turno)){
         System.out.println("___________________\n Negras: " 
                + ia.puntuar(true, tablero.tablero()) + "\n Blancas: " 
                +ia.puntuar(false, tablero.tablero())  + "\n___________________\n"); 
                ia.printT("", tablero.tablero());
-        //turno = turno == 1? 2: 1;
         
       }else{return;}
      }else{
-        System.out.println("No puedes jugar :c ");
+        System.out.println("No puedes jugar :c ");//Si no hay jugadas
      }
+     
+     //Jugada de IA
      actuador.limpiarTablero();
      sensor.posiblesJugadas(2);
      puedeJugarB = sensor.numPosiblesJugadas(2) > 0 ;
      
      System.out.println(puedeJugarB);
      
-     if(puedeJugarB){
+     if(puedeJugarB){//Si puede jugar la ia
        ia = new IAJP(tablero.tablero(), new TableroJP(), nivel, "");
         tablero.ponerTablero( ia.realizarJugada(tablero.tablero(), false));
         
@@ -84,6 +88,9 @@ void mousePressed(){
   
   }
   
+  /**
+  * Este método pone valores iniciales del juego
+  */
   void config(int nivel){
    tablero = new TableroJP();
    sensor = new SensoresJP(tablero);
